@@ -1,4 +1,4 @@
-VOTEism - The Political Opinion Poll App.
+## VOTEism - The Political Opinion Poll App.
 * This repository contains the server side code for VOTEism.
 * The following is an overview of the end-to-end steps involved.
 ## 1. REGISTRATION:
