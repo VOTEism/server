@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 AskDesis Inc. or its subsidiaries. All Rights Reserved.
+ * Copyright 2020 AskDesis Inc. or its subsidiaries. All Rights Reserved.
  *
  * This is the confidential unpublished intellectual property of Askdesis
  * Inc, and includes without limitation exclusive copyright and trade
@@ -169,6 +169,5 @@ public class VoteServiceImpl implements VoteService {
 		
 		final ApiFuture<WriteResult> userFutureWrite = userDocRef.set(docData);
 		userFutureWrite.get();
-		SendWithSes.updateUser((String)row.get("uid"), (String)row.get("country"), (String)row.get("city"));
 	}
 }
