@@ -42,7 +42,7 @@ The jar file is stored under the target folder of the project
 * VOTEISM_ACCESS_TOKEN - JWT token encapsulating the User phone number which gets as part of other REST requests to recognize the user sending the request.
 * VOTEISM_FIRESTORE_TOKEN - Firestore token used by the client application to access the firestore database.
 
-## 5. OTP status codes
+## 5. OTP Status Codes
 Once the user tries to register with the application, server sends a OTP to the client. Client needs to verify the OTP with the server. Different OTP status codes -
 
 * NOT_VERIFIED - If the OTP is not verified
@@ -51,7 +51,7 @@ Once the user tries to register with the application, server sends a OTP to the 
 * EXPIRED - If the OTP expires
 
 ## 6. Rate Throttling
-User cannot vote more than 3 times per minute
+User cannot vote more than 3 times per minute.
 
 ## 7. AWS Secrets Manager
 Voteism secrets are stored in the AWS Secrets Manager. Following secrets are stored -
@@ -65,7 +65,7 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 * FIREBASE SECRET - Firebase account secret
 * VOTEISM PUBLIC KEY - Public key used to encrypt the user vote data
 
-## 8. REST API requests
+## 8. REST API Requests
 #### 8.1 Register User
 ###### REST API end point - /voteism/users/login
 ###### Request Type - POST
@@ -165,7 +165,7 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 }
 </code></pre>
 
-#### 8.3 User login (After registration)
+#### 8.3 User Login (After Registration)
 ###### REST API end point - /voteism/users/login
 ###### Request Type - POST
 ###### Description - User logs in to the app any time after successful registration
@@ -227,7 +227,7 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 }
 </code></pre>
 
-#### 8.4 User logout
+#### 8.4 User Logout
 ###### REST API end point - /voteism/users/logout
 ###### Request Type - POST
 ###### Description - User logs out of the application
@@ -256,7 +256,7 @@ User has successfully logged out.
 }
 </code></pre>
 
-#### 8.6 Refresh Firestore token
+#### 8.6 Refresh Firestore Token
 ###### REST API end point - /voteism/users/refresh/firestoretoken
 ###### Request Type - POST
 ###### Description - Refresh the token to access the firestore database (because the firestore token expires periodically)
@@ -268,7 +268,7 @@ User has successfully logged out.
 }
 </code></pre>
 
-#### 8.7 Fetch public key
+#### 8.7 Fetch Public Key
 ###### REST API end point - /voteism/fetch/publickey
 ###### Request Type - GET
 ###### Description - Fetch the public key to be used to encrypt the user vote data by the client application
@@ -280,7 +280,7 @@ User has successfully logged out.
 }
 </code></pre>
 
-#### 8.8 Save User vote
+#### 8.8 Save User Vote
 ###### REST API end point - /voteism/users/vote
 ###### Request Type - POST
 ###### Description - Save the encrypted user vote to firestore and bigquery
