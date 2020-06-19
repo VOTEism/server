@@ -281,7 +281,7 @@ User has successfully logged out.
 </code></pre>
 
 #### 8.8 Save User vote
-**REST API end point - /voteism/users/vote**
+###### REST API end point - /voteism/users/vote
 ###### Request Type - POST
 ###### Description - Save the encrypted user vote to firestore and bigquery
 ###### Required HTTP Headers for the request - VOTEISM_TOKEN, VOTEISM_ACCESS_TOKEN
