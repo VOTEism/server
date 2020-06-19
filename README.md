@@ -67,7 +67,7 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 ## 10. REST API requests
 #### 10.1 Register User
 ###### REST API end point - /voteism/users/login
-#### Request Type - POST
+##### Request Type - POST
 #### Description - Sends a OTP to the client application that needs to be verified for successful registration
 #### Example Request Body -
 <pre><code>
