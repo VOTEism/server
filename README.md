@@ -65,8 +65,8 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 * VOTEISM PUBLIC KEY - Public key used to encrypt the user vote data
 
 ## 10. REST API requests
-### 10.1 Register User
-### REST API end point - /voteism/users/login
+#### 10.1 Register User
+###### REST API end point - /voteism/users/login
 #### Request Type - POST
 #### Description - Sends a OTP to the client application that needs to be verified for successful registration
 #### Example Request Body -
