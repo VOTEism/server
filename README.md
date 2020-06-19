@@ -2,28 +2,29 @@
 * This repository contains the server side code for VOTEism.
 * The following is an overview of the end-to-end steps involved.
 
-## 1. REGISTRATION:
+## 1. PROCESS OVERVIEW:
+### 1.1 Registration
 * [CLIENT] User enters mobile number to start registration process.
 * [SERVER] Twilio carrier lookup is done to identify valid USA mobile numbers.
 * [SERVER] OTP is sent to valid numbers via sendwithses.com or twilio.com (fallback).
 * [CLIENT] User enters OTP.
 * [SERVER] OTP entered is verified and valid user is registered.
 
-## 2. VOTING:
+### 1.2 Voting
 * [CLIENT] User selects and confirms electoral candidate.
 * [SERVER] Server sends the public key (4096 bit) to user.
 * [CLIENT] The vote is encrypted using the public key along with few other details like device id, location, ip address, etc. The encrypted vote is signed and both the encrypted vote and the signature are sent to the server.
 * [SERVER] Server receives the encrypted vote, signature, location, device id, etc. This information is stored in BigQuery and in Firestore.
 * [SERVER] Success/Failure message is sent to client.
 
-## 3. COUNTING:
+### 1.3 Counting
 * [COMPUTER-1] Encrypted votes are downloaded to computer-1.
 * [COMPUTER-2 (Air-Gapped)] Encrypted votes are transferred to computer-2.
 * [COMPUTER-2] The signature of each vote is verified and the encrypted vote is decrypted with a password protected private key.
 * [COMPUTER-2] Results are aggregated after removing duplicates (only one vote counted per mobile-number/device-id combination).
 * [COMPUTER-1] Aggregated results transferred to computer-1 and uploaded to database.
 
-## 4. MINIMAL REQUIREMENTS
+## 2. MINIMAL REQUIREMENTS
 * Java 8
 * Springboot
 * Google cloud account - Server side writes to Firestore db and Bigquery
@@ -32,16 +33,16 @@
 * SendWithSes account - Register with SendWithSes application to send SMS via REST API calls to sendwithses
 * Maven 3 - To build the project
 
-## 5. BUILD
+## 3. BUILD
 From the top level directory run "mvn clean package" to build the project
 The jar file is stored under the target folder of the project
 
-## 6. What important headers get returned in HTTP response as part of successful OTP verification/login ?
+## 4. What important headers get returned in HTTP response as part of successful OTP verification/login ?
 * VOTEISM_TOKEN - API ACCESS KEY (x-api-key) for the AWS API Gateway, which should be passed in as part of other REST requests.
 * VOTEISM_ACCESS_TOKEN - JWT token encapsulating the User phone number which gets as part of other REST requests to recognize the user sending the request.
 * VOTEISM_FIRESTORE_TOKEN - Firestore token used by the client application to access the firestore database.
 
-## 7. OTP status codes
+## 5. OTP status codes
 Once the user tries to register with the application, server sends a OTP to the client. Client needs to verify the OTP with the server. Different OTP status codes -
 
 * NOT_VERIFIED - If the OTP is not verified
@@ -49,10 +50,10 @@ Once the user tries to register with the application, server sends a OTP to the 
 * FAIL - If the OTP verification fails
 * EXPIRED - If the OTP expires
 
-## 8. Rate Throttling
+## 6. Rate Throttling
 User cannot vote more than 3 times per minute
 
-## 9. AWS Secrets Manager
+## 7. AWS Secrets Manager
 Voteism secrets are stored in the AWS Secrets Manager. Following secrets are stored -
 
 * TWILIO ACCOUNT ID
@@ -64,8 +65,8 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 * FIREBASE SECRET - Firebase account secret
 * VOTEISM PUBLIC KEY - Public key used to encrypt the user vote data
 
-## 10. REST API requests
-#### 10.1 Register User
+## 8. REST API requests
+#### 8.1 Register User
 ###### REST API end point - /voteism/users/login
 ###### Request Type - POST
 ###### Description - Sends a OTP to the client application that needs to be verified for successful registration
@@ -97,7 +98,7 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 }
 </code></pre>
 
-#### 10.2 Verify OTP
+#### 8.2 Verify OTP
 ###### REST API end point - /voteism/otp
 ###### Request Type - POST
 ###### Description - Verifies the OTP
@@ -164,7 +165,7 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 }
 </code></pre>
 
-#### 10.3 User login (After registration)
+#### 8.3 User login (After registration)
 ###### REST API end point - /voteism/users/login
 ###### Request Type - POST
 ###### Description - User logs in to the app any time after successful registration
@@ -226,7 +227,7 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 }
 </code></pre>
 
-#### 10.4 User logout
+#### 8.4 User logout
 ###### REST API end point - /voteism/users/logout
 ###### Request Type - POST
 ###### Description - User logs out of the application
@@ -236,7 +237,7 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 User has successfully logged out.
 </code></pre>
 
-#### 10.5 Resend OTP
+#### 8.5 Resend OTP
 ###### REST API end point - /voteism/otp
 ###### Request Type - POST
 ###### Description - User requests the client application to resend the OTP
@@ -255,7 +256,7 @@ User has successfully logged out.
 }
 </code></pre>
 
-#### 10.6 Refresh Firestore token
+#### 8.6 Refresh Firestore token
 ###### REST API end point - /voteism/users/refresh/firestoretoken
 ###### Request Type - POST
 ###### Description - Refresh the token to access the firestore database (because the firestore token expires periodically)
@@ -263,11 +264,11 @@ User has successfully logged out.
 ###### Response Body
 <pre><code>
 {
-    "firestoretoken": "eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbS9nb29nbGUuaWRlbnRpdHkuaWRlbnRpdHl0b29sa2l0LnYxLklkZW50aXR5VG9vbGtpdCIsImNsYWltcyI6eyJwcmVtaXVtQWNjb3VudCI6dHJ1ZX0sImV4cCI6MTU4ODczNDEyNCwiaWF0IjoxNTg4NzMwNTI0LCJpc3MiOiJicS1maXJlc3RvcmUtZGZ2QHZvdGVpc20uaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJzdWIiOiJicS1maXJlc3RvcmUtZGV2QHZvdGVpc20uaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJ1aWQiOiJ1c2VyIn0.DrBNdr3IDamWupJhrcFbvvP5c-0ZPW-CnVQLnbK7GclZD_ht0U-PO7PNKQbb5e0kl5xZ0LzEhYJfveIBRJNV3rpO3b9sGjrDCkZHM0bscZoEARuFjGgCnQfLydSAxfT0UBXKXPjk25oGGuDc2Re_wEe7oHVSPX7gW_LYtVICqLab0DDGzRFelQ1oQOqOarXlpmPIXvJAxqdnnRByQMzGPYfa4rmGpCGdAm2dhSaSBLUkZZ3N2qLp1SzuCCg3qnVLxEbbx3cPvotetojg54sRryb4SGr7jtZ8oS03HOi_IAIef8wz9e-CjdlHUXk"
+    "firestoretoken": "eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbS9nb29nbGUuaWRlbnRpdHkuaWRlbnRpdHl0b29sa2l0LnYxLklkZW50aXR5VG9vbGtpdCIsImNsYWltcyI6eyJwcmVtaXVtQWNjb3VudCI6dHJ1ZX0sImV4cCI6MTU4ODczNDEyNCwiaWF0IjoxNTg4NzMwNTI0LCJpc3MiOiJicS1maXJlc3RvcmUtZGZ2QHZvdGVpc20uaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJzdWIiOiJicS1maXJlc3RvcmUtZGV2QHZvdGVpc20uaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJ1aWQiOiJ1c2VyIn0.DrBNdr3IDVOTEpJhrcFbvvP5c-0ZPW-CnVQLnbK7GclZD_ht0U-PO7PNKQbb5e0kl5xZ0LzEhYJfveIBRJNV3rpO3b9sGjrDCkZHM0bscZoEARuFjGgCnQfLydSAxfT0UBXKXPjk25oGGuDc2Re_wEe7oHVSPX7gW_LYtVICqLab0DDGzRFelQ1oQOqOarXlpmPIXvJAxqdnnRByQMzGPYfa4rmGpCGdAm2dhSaSBLUkZZ3N2qLp1SzuCCg3qnVLxEbbx3cPvotetojg54sRryb4SGr7jtZ8oS03HOi_IAIef8wz9e-CjdlHUXk"
 }
 </code></pre>
 
-#### 10.7 Fetch public key
+#### 8.7 Fetch public key
 ###### REST API end point - /voteism/fetch/publickey
 ###### Request Type - GET
 ###### Description - Fetch the public key to be used to encrypt the user vote data by the client application
@@ -275,12 +276,12 @@ User has successfully logged out.
 ###### Response Body
 <pre><code>
 {
-    "publickey": "-----BEGIN PUBLIC KEY----- MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAsYgpkPThsOWKJSpSIVWl ZOxUBY74j+W+OyfDWEpKyQ+/jocRSAujSetoXNLnUwFMWIQX94J1GFu9QVKcy/e1 vvojp2lfViU+0dudl6hgteRnD3QVlBsrrT1NGs9QzSUezM7gDIXcFk9TawdvTAU6 nI4suObUcbRJT8oiUwQSV1SllxiGCEKVscr/VhLh9iKhr+Cj22Dr3pV3eatooECf pTY4ZR7XGJmkcris2RYCnwpq3aTSKbQdY+U44Vy57A7qs7c5cWlFkFLGVdLjMUZR 7BQydkBlWDVh2MfpFJX8W7zQUh5TjgKH7SROlVdlLlUCF4YWW3tvotepSTY1s+5s 6M+h/AchQWbLsJnFzG9AbihwIe1LOwWnPr7WM5HR1dGqJXJNq/vVHPu/y7Fb6oDC W3p4j7tBVXtX7E4/btg3MccHtHHNxnvb0rGBAdwOi7OkgRUXX6ZKIARYuFnN2xuz yCOeFth00XO0TyT/QT9HuMMFF1BTC7nz1nax6fGmEuQjt/woLWZ45J0jXJEFbXGt lQgvCoN/7nRn2Csiypm+mxZKs2izBejQDLdkz8D/ZPnf8Jf1oBrFZbGxbB5uKxWo 4Tigu+MXogjumPmyBFfVJcnN/Mdm+O2EBEhgHEWPmf0A1UZvbpK11ou74QXk5pKt==-----END PUBLIC KEY----- "
+    "publickey": "-----BEGIN PUBLIC KEY----- MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAsYgpkPThsOWKJSpSIVWl ZOxUBY74j+W+OyfDWEpKyQ+/jocRSAujSetoXNLnUwFMWIQX94J1GFu9QVKcy/e1 vvojp2lfViU+0dudl6hgteRnD3QVlBsrrT1NGs9QzSUezM7gDIXcFk9TawdvTAU6 nI4suObUcbRJT8oiUwQSV1SllxiGCEKVscr/VhLh9iKhr+Cj22Dr3pV3eatooECf pTY4ZR7XGJmkcris2RYCnwpq3aTSKbQdY+U44Vy57A7qs7c5cWlFkFLGVdLjMUZR 7BQydkBlWDVh2MfpFJX8W7zQUh5TjgKH7SRVOTElLlUCF4YWW3tvotepSTY1s+5s 6M+h/AchQWbLsJnFzG9AbihwIe1LOwWnPr7WM5HR1dGqJXJNq/vVHPu/y7Fb6oDC W3p4j7tBVXtX7E4/btg3MccHtHHNxnvb0rGBAdwOi7OkgRUXX6ZKIARYuFnN2xuz yCOeFth00XO0TyT/QT9HuMMFF1BTC7nz1nax6fGmEuQjt/woLWZ45J0jXJEFbXGt lQgvCoN/7nRn2Csiypm+mxZKs2izBejQDLdkz8D/ZPnf8Jf1oBrFZbGxbB5uKxWo 4Tigu+MXogjumPmyBFfVJcnN/Mdm+O2EBEhgHEWPmf0A1UZvbpK11ou74QXk5pKt==-----END PUBLIC KEY----- "
 }
 </code></pre>
 
-#### 10.8 Save User vote
-###### REST API end point - /voteism/users/vote
+#### 8.8 Save User vote
+**REST API end point - /voteism/users/vote**
 ###### Request Type - POST
 ###### Description - Save the encrypted user vote to firestore and bigquery
 ###### Required HTTP Headers for the request - VOTEISM_TOKEN, VOTEISM_ACCESS_TOKEN
