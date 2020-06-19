@@ -67,9 +67,9 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 ## 10. REST API requests
 #### 10.1 Register User
 ###### REST API end point - /voteism/users/login
-##### Request Type - POST
-#### Description - Sends a OTP to the client application that needs to be verified for successful registration
-#### Example Request Body -
+###### Request Type - POST
+###### Description - Sends a OTP to the client application that needs to be verified for successful registration
+###### Example Request Body -
 <pre><code>
 {
   "phonenumber":"+12345678900",
@@ -98,10 +98,10 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 </code></pre>
 
 #### 10.2 Verify OTP
-#### REST API end point - /voteism/otp
-#### Request Type - POST
-#### Description - Verifies the OTP
-#### Example Request Body -
+###### REST API end point - /voteism/otp
+###### Request Type - POST
+###### Description - Verifies the OTP
+###### Example Request Body -
 <pre><code>
 {
 	"otp" : "744873",
@@ -165,10 +165,10 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 </code></pre>
 
 #### 10.3 User login (After registration)
-#### REST API end point - /voteism/users/login
-#### Request Type - POST
-#### Description - User logs in to the app any time after successful registration
-#### Example Request Body -
+###### REST API end point - /voteism/users/login
+###### Request Type - POST
+###### Description - User logs in to the app any time after successful registration
+###### Example Request Body -
 <pre><code>
 {
   "phonenumber":"+12345678900",
@@ -227,21 +227,20 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 </code></pre>
 
 #### 10.4 User logout
-#### REST API end point - /voteism/users/logout
-#### Request Type - POST
-#### Description - User logs out of the application
-#### Required HTTP Headers for the request - VOTEISM_TOKEN, VOTEISM_ACCESS_TOKEN
-#### Response Body
+###### REST API end point - /voteism/users/logout
+###### Request Type - POST
+###### Description - User logs out of the application
+###### Required HTTP Headers for the request - VOTEISM_TOKEN, VOTEISM_ACCESS_TOKEN
+###### Response Body
 <pre><code>
 User has successfully logged out.
 </code></pre>
 
 #### 10.5 Resend OTP
-#### REST API end point - /voteism/otp
-#### Request Type - POST
-#### Description - User requests the client application to resend the OTP
-#### Example Request Body
-
+###### REST API end point - /voteism/otp
+###### Request Type - POST
+###### Description - User requests the client application to resend the OTP
+###### Example Request Body
 <code><pre>
 {
 	"phonenumber" : "+12345678900",
@@ -257,50 +256,50 @@ User has successfully logged out.
 </code></pre>
 
 #### 10.6 Refresh Firestore token
-#### REST API end point - /voteism/users/refresh/firestoretoken
-#### Request Type - POST
-#### Description - Refresh the token to access the firestore database (because the firestore token expires periodically)
-#### Required HTTP Headers for the request - VOTEISM_TOKEN, VOTEISM_ACCESS_TOKEN
-#### Response Body
+###### REST API end point - /voteism/users/refresh/firestoretoken
+###### Request Type - POST
+###### Description - Refresh the token to access the firestore database (because the firestore token expires periodically)
+###### Required HTTP Headers for the request - VOTEISM_TOKEN, VOTEISM_ACCESS_TOKEN
+###### Response Body
 <pre><code>
 {
-    "firestoretoken": "eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbS9nb29nbGUuaWRlbnRpdHkuaWRlbnRpdHl0b29sa2l0LnYxLklkZW50aXR5VG9vbGtpdCIsImNsYWltcyI6eyJwcmVtaXVtQWNjb3VudCI6dHJ1ZX0sImV4cCI6MTU4ODczNDEyNCwiaWF0IjoxNTg4NzMwNTI0LCJpc3MiOiJicS1maXJlc3RvcmUtZGV2QHZvdGVpc20uaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJzdWIiOiJicS1maXJlc3RvcmUtZGV2QHZvdGVpc20uaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJ1aWQiOiJ1c2VyIn0.DrBNdr3IDamWupJhrcFbvvP5c-0ZPW-CnVQLnaK7GclZD_ht0U-PO7PNKQbb5e0kl5xZ0LzEhYJfveIBRJNV3rpO3b9sGjrDCkZHM0bscZoEARuFjGgCnQfLydSAxfT0UBXKXPjk25oGGuDc2Re_wEe7oHVSPX7gW_LYtVICqLab0DDGzRFelQ1oQOqOarXlpmPIXvJAxqdnnRByQMzGPYfa4rmGpCGdAm2dhSaSBLUkZZ3N2qLP1SzuCCg3qnVLxEbbx3cPlesptojg54sRryb4SGr7jtZ8oS03HOi_IAIef8wz9e-CjdlHUXk"
+    "firestoretoken": "eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbS9nb29nbGUuaWRlbnRpdHkuaWRlbnRpdHl0b29sa2l0LnYxLklkZW50aXR5VG9vbGtpdCIsImNsYWltcyI6eyJwcmVtaXVtQWNjb3VudCI6dHJ1ZX0sImV4cCI6MTU4ODczNDEyNCwiaWF0IjoxNTg4NzMwNTI0LCJpc3MiOiJicS1maXJlc3RvcmUtZGZ2QHZvdGVpc20uaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJzdWIiOiJicS1maXJlc3RvcmUtZGV2QHZvdGVpc20uaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJ1aWQiOiJ1c2VyIn0.DrBNdr3IDamWupJhrcFbvvP5c-0ZPW-CnVQLnbK7GclZD_ht0U-PO7PNKQbb5e0kl5xZ0LzEhYJfveIBRJNV3rpO3b9sGjrDCkZHM0bscZoEARuFjGgCnQfLydSAxfT0UBXKXPjk25oGGuDc2Re_wEe7oHVSPX7gW_LYtVICqLab0DDGzRFelQ1oQOqOarXlpmPIXvJAxqdnnRByQMzGPYfa4rmGpCGdAm2dhSaSBLUkZZ3N2qLp1SzuCCg3qnVLxEbbx3cPvotetojg54sRryb4SGr7jtZ8oS03HOi_IAIef8wz9e-CjdlHUXk"
 }
 </code></pre>
 
 #### 10.7 Fetch public key
-#### REST API end point - /voteism/fetch/publickey
-#### Request Type - GET
-#### Description - Fetch the public key to be used to encrypt the user vote data by the client application
-#### Required HTTP Headers for the request - VOTEISM_TOKEN, VOTEISM_ACCESS_TOKEN
-#### Response Body
+###### REST API end point - /voteism/fetch/publickey
+###### Request Type - GET
+###### Description - Fetch the public key to be used to encrypt the user vote data by the client application
+###### Required HTTP Headers for the request - VOTEISM_TOKEN, VOTEISM_ACCESS_TOKEN
+###### Response Body
 <pre><code>
 {
-    "publickey": "-----BEGIN PUBLIC KEY----- MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAsYgpkPThsOWKJSpSIVWl ZOxUBY74j+W+OzfDWEpKyQ+/jocRSAujSetoXNLnUwFMWIQX94J1GFu9QVKcy/e1 vvojp2lfViU+0dudl6hgteRnD3QVlBsrrT1NGs9QzSUezM7gDIXcFk9TawdvTAU6 nI4suObUcbRJT8oiUwQSV1SllxiGCEKVscr/VhLh9iKhr+Cj22Dr3pV3eatooECf pTY4ZR7XGJmkcris2RYCnwpq3aTSKbQdY+U44Vy57A7qs7c5cWlFkFLGVdLjMUZR 7BQydkBlWDVh2MfpFJX8W7zQUh5TjgKH7SROlVdlLlUCF4YWW3tuo1npSTY1s+5s 6M+h/AchQWbLsJnFzG9AbihwIe1LOwWnPr7WM5HR1dGqJXJNq/vVHPu/y7Fb6oDC W3p4j7tBVXtX7E4/btg3MccHtHHNxnvb0rGBAdwOi7OkgRUXX6ZKIARYuFnN2xuz yCOeFth00XO0TyT/QT9HuMMFF1BTC7nz1nax6eGmEuQjt/woLWZ45J0jXJEFbXGt lQgvCoN/7nRn2Csiypm+mxZKs2izBejQDLdkz8D/ZPnf8Jf1oBrFZbGxbB5uKxWo 4Tigu+MXogjumPmyBFfVJcnN/Mdm+O2EBEhgHEWPmf0A1UZvbpK11ou74QXk5pJt==-----END PUBLIC KEY----- "
+    "publickey": "-----BEGIN PUBLIC KEY----- MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAsYgpkPThsOWKJSpSIVWl ZOxUBY74j+W+OyfDWEpKyQ+/jocRSAujSetoXNLnUwFMWIQX94J1GFu9QVKcy/e1 vvojp2lfViU+0dudl6hgteRnD3QVlBsrrT1NGs9QzSUezM7gDIXcFk9TawdvTAU6 nI4suObUcbRJT8oiUwQSV1SllxiGCEKVscr/VhLh9iKhr+Cj22Dr3pV3eatooECf pTY4ZR7XGJmkcris2RYCnwpq3aTSKbQdY+U44Vy57A7qs7c5cWlFkFLGVdLjMUZR 7BQydkBlWDVh2MfpFJX8W7zQUh5TjgKH7SROlVdlLlUCF4YWW3tvotepSTY1s+5s 6M+h/AchQWbLsJnFzG9AbihwIe1LOwWnPr7WM5HR1dGqJXJNq/vVHPu/y7Fb6oDC W3p4j7tBVXtX7E4/btg3MccHtHHNxnvb0rGBAdwOi7OkgRUXX6ZKIARYuFnN2xuz yCOeFth00XO0TyT/QT9HuMMFF1BTC7nz1nax6fGmEuQjt/woLWZ45J0jXJEFbXGt lQgvCoN/7nRn2Csiypm+mxZKs2izBejQDLdkz8D/ZPnf8Jf1oBrFZbGxbB5uKxWo 4Tigu+MXogjumPmyBFfVJcnN/Mdm+O2EBEhgHEWPmf0A1UZvbpK11ou74QXk5pKt==-----END PUBLIC KEY----- "
 }
 </code></pre>
 
 #### 10.8 Save User vote
-#### REST API end point - /voteism/users/vote
-#### Request Type - POST
-#### Description - Save the encrypted user vote to firestore and bigquery
-#### Required HTTP Headers for the request - VOTEISM_TOKEN, VOTEISM_ACCESS_TOKEN
-#### Example Request Body -
+###### REST API end point - /voteism/users/vote
+###### Request Type - POST
+###### Description - Save the encrypted user vote to firestore and bigquery
+###### Required HTTP Headers for the request - VOTEISM_TOKEN, VOTEISM_ACCESS_TOKEN
+###### Example Request Body -
 <pre><code>
 {
-	"encryptedVote" : "WR+fxqNbpup4VhLRNbLZdw0GKRRQcmzLbZmc5cmIYRiR8tVeVOV2gegPYNZOw+KhemFkMnCS1UhWNM7pwqfV0wkJqmRzOFDPzAvx8jKWiFmfkhQFpkYTRH/+XezMaY6qKwee+k4Fn9QJCVVoju3xQhxmPbpmn+wr6zRqAQNEaj8hPasZSKk81jtqWzNnlty4FqpHWU/CeUfGkf71YQNDZv2wjD/yK0ClHImwCA2fs7Tfo+VE+v7zvoEK57lEUGOAEIPW4fayXF7/B29OJf2bTUZQgaVQwTok7w+e8E4MzT+TklbD/7N85o4UfP7XP6XsrhLIAklLCClmAxFch9TAPPioJGGLoIQqCj26RTD873jVv7SjD+BOICDbgOTyT4TJKa0gdOd2yFB3ex/b0/vndaCgGrSjFMIMYYRMeXEMPiEYmg0/how9BPZ8+hmoQgO46QcLTiQpHEEldm063rFfkf9k5PC7YkMOA/M48hA9r8Nkpgl9AC4ko1yatxkxLcKxti/bYZgnjH7SJ26RtEdJAYsa6ukw5jc463KYd2FSFyi9r7TEmyxUtnE0/ikuC/vfDLcXpqODrQq/BdSM3rQjqraBcWIYUt4n+J0901ES2DT+CvM2AhybRpv6tr3FGwh6M6TsQK7K60WncNQUH+cQYquH+i8+9jIZUMH3DN++hgU=",
-	"voteSignature" : "c5b6c9eece7872a7462f2e000705852c973b7444a5a75a2308f0f83b4896e82f",
+	"encryptedVote" : "WR+fxqNbpup4VhLRNbLKdw0GKRRQcmzLbZmc5cmIYRiR8tVeVOV2gegPYNZOw+KhemFkMnCS1UhWNM7pwqfV0wkJqmRzOFDPzAvx8jKWiFmfkhQFpkYTRH/+XezMaY6qKwee+k4Fn9QJCVVoju3xQhxmPbpmn+wr6zRqAQNEaj8hPasZSKk81jtqWzNnlty4FqpHWU/CeUfGkf71YQNDZv2wjD/yK0ClHImwCA2fs7Tfo+VE+v7zvoEK57lEUGOAEIPW4fayXF7/B29OJf2bTUZQgaVQwTok7w+e8E4MzT+TklbD/7N85o4UfP7XP6XsrhLIAklLCClmAxFch9TAPPioJGGLoIQqCj26RTD873jVv7SjD+BOICDbgOTyT4TJKa0gdOd2yFB3ex/b0/vndaCgGrSjFMIMYYRMeXEMPiENmg0/how9BPZ8+hmoQgO46QcLTiQpHEEldm063rFfkf9k5PC7YkMOA/M48hA9r8Nkpgl9AC4ko1yatxkxLcKxti/bYZgnjH7SJ26RtEdJAYsa6ukw5jc463KYd2FSFyi9r7TEmyxUtnE0/ikuC/vfDLcXVOTErQq/BdSM3rQjqraBcWIYUt4n+J0901ES2DT+CvM2AhybRpv6tr3FGwh6M6TsQK7K60WncNQUH+cQYquH+i8+9jIZUMH3BN++hgU=",
+	"voteSignature" : "c5b6c9eece7872a7462f2e000vote52c973b7444a7775a2308f0f83b4896e82f",
 	"user" : {
 		  "phonenumber":"+12345678900",
 		  "location": {
 		  	"city" : "Seattle",
 		  	"state": "WA",
 		  	"country": "United States",
-		  	"current_latitude" : "42.09032234895876",
-		  	"current_longitude" : "-71.34104757167215"
+		  	"current_latitude" : "42.09232234895876",
+		  	"current_longitude" : "-71.94104757167215"
 		  },
 		  "userDeviceDetails" :{
-		  	"deviceToken" : "570b81b2-289f-4558-aa49-70a1f86ca690",
+		  	"deviceToken" : "570b92b2-289f-4558-vote-70a1ismca690",
 		  	"deviceOS" : "Android",
 		  	"simulator" : false,
 		  	"macAddress" : "02:00:00:00:00:00",
