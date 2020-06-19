@@ -114,10 +114,10 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 	  	"state": "WA",
 	  	"country": "United States",
 	  	"current_latitude" : "42.09032234895876",
-	  	"current_longitude" : "-71.34104757167215"
+	  	"current_longitude" : "-71.34107757167215"
 	  },
 	  "userDeviceDetails" :{
-	  	"deviceToken" : "570b81b2-289f-4558-aa49-70a1f86ca690",
+	  	"deviceToken" : "570b81b2-289f-4558-vote-70a1f86ca690",
 	  	"deviceOS" : "Android",
 	  	"simulator" : false,
 	  	"macAddress" : "02:00:00:00:00:00",
@@ -150,11 +150,11 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
             "city": "Seattle",
             "state": "WA",
             "country": "United States",
-            "currentLongitude": "-71.34104757167215",
+            "currentLongitude": "-61.34104757167255",
             "currentLatitude": "42.09032234895876"
         },
         "userDeviceDetails": {
-            "deviceToken": "570b81b2-289f-4558-aa49-70a1f86ca690",
+            "deviceToken": "570b81b2-289f-4558-vote-70a1f86ca690",
             "deviceOS": "Android",
             "simulator": false,
             "ipAddress": "192.168.0.113",
@@ -181,7 +181,7 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
   	"current_longitude" : "-71.34104757167215"
   },
   "userDeviceDetails" :{
-  	"deviceToken" : "570b81b2-289f-4558-aa49-70a1f86ca690",
+  	"deviceToken" : "570b81b2-289f-4558-vote-70a1f86ca690",
   	"deviceOS" : "Android",
   	"isSimulator" : false,
   	"macAddress" : "02:00:00:00:00:00",
@@ -216,7 +216,7 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
             "currentLatitude": "42.09032234895876"
         },
         "userDeviceDetails": {
-            "deviceToken": "570b81b2-289f-4558-aa49-70a1f86ca690",
+            "deviceToken": "570b81b2-289f-4558-vote-70a1f86ca690",
             "deviceOS": "Android",
             "simulator": false,
             "ipAddress": "192.168.0.113",
