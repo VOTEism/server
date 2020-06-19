@@ -144,7 +144,6 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
     "user": {
         "phonenumber": "+12345678900",
         "loginStatus": true,
-        "registeredLocation": null,
         "location": {
             "city": "Seattle",
             "state": "WA",
@@ -207,7 +206,6 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
     "user": {
         "phonenumber": "+12345678900",
         "loginStatus": true,
-        "registeredLocation": null,
         "location": {
             "city": "Seattle",
             "state": "WA",
@@ -235,12 +233,15 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 #### Response Body
 <pre><code>
 User has successfully logged out.
-10.5 Resend OTP
-REST API end point - /voteism/otp
-Request Type - POST
-Description - User requests the client application to resend the OTP
-Example Request Body
+</code></pre>
 
+#### 10.5 Resend OTP
+#### REST API end point - /voteism/otp
+#### Request Type - POST
+#### Description - User requests the client application to resend the OTP
+#### Example Request Body
+
+<code><pre>
 {
 	"phonenumber" : "+12345678900",
 	"operation" : "resend"
@@ -268,7 +269,7 @@ Example Request Body
 
 #### 10.7 Fetch public key
 #### REST API end point - /voteism/fetch/publickey
-#### Request Type - POST
+#### Request Type - GET
 #### Description - Fetch the public key to be used to encrypt the user vote data by the client application
 #### Required HTTP Headers for the request - VOTEISM_TOKEN, VOTEISM_ACCESS_TOKEN
 #### Response Body
