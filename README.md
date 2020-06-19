@@ -1,6 +1,7 @@
-## VOTEism - The Political Opinion Poll App.
+# VOTEism - The Political Opinion Poll App.
 * This repository contains the server side code for VOTEism.
 * The following is an overview of the end-to-end steps involved.
+
 ## 1. REGISTRATION:
 * [CLIENT] User enters mobile number to start registration process.
 * [SERVER] Twilio carrier lookup is done to identify valid USA mobile numbers.
@@ -22,7 +23,7 @@
 * [COMPUTER-2] Results are aggregated after removing duplicates (only one vote counted per mobile-number/device-id combination).
 * [COMPUTER-1] Aggregated results transferred to computer-1 and uploaded to database.
 
-## 4. MINIMAL REQUIREMENTS
+### 4. MINIMAL REQUIREMENTS
 * Java 8
 * Springboot
 * Google cloud account - Server side writes to Firestore db and Bigquery
