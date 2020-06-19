@@ -82,7 +82,7 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
   	"current_longitude" : "-71.34104757167215"
   },
   "userDeviceDetails" :{
-  	"deviceToken" : "570b81b2-289f-4558-aa49-70a1f86ca690",
+  	"deviceToken" : "570b81b2-289f-4558-vote-70a1f86ca690",
   	"deviceOS" : "Android",
   	"isSimulator" : false,
   	"macAddress" : "02:00:00:00:00:00",
