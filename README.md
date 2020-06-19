@@ -2,21 +2,21 @@
 * This repository contains the server side code for VOTEism.
 * The following is an overview of the end-to-end steps involved.
 
-## 1. REGISTRATION:
+### 1. REGISTRATION:
 * [CLIENT] User enters mobile number to start registration process.
 * [SERVER] Twilio carrier lookup is done to identify valid USA mobile numbers.
 * [SERVER] OTP is sent to valid numbers via sendwithses.com or twilio.com (fallback).
 * [CLIENT] User enters OTP.
 * [SERVER] OTP entered is verified and valid user is registered.
 
-## 2. VOTING:
+### 2. VOTING:
 * [CLIENT] User selects and confirms electoral candidate.
 * [SERVER] Server sends the public key (4096 bit) to user.
 * [CLIENT] The vote is encrypted using the public key along with few other details like device id, location, ip address, etc. The encrypted vote is signed and both the encrypted vote and the signature are sent to the server.
 * [SERVER] Server receives the encrypted vote, signature, location, device id, etc. This information is stored in BigQuery and in Firestore.
 * [SERVER] Success/Failure message is sent to client.
 
-## 3. COUNTING:
+### 3. COUNTING:
 * [COMPUTER-1] Encrypted votes are downloaded to computer-1.
 * [COMPUTER-2 (Air-Gapped)] Encrypted votes are transferred to computer-2.
 * [COMPUTER-2] The signature of each vote is verified and the encrypted vote is decrypted with a password protected private key.
@@ -32,16 +32,16 @@
 * SendWithSes account - Register with SendWithSes application to send SMS via REST API calls to sendwithses
 * Maven 3 - To build the project
 
-## 5. BUILD
+### 5. BUILD
 From the top level directory run "mvn clean package" to build the project
 The jar file is stored under the target folder of the project
 
-## 6. What important headers get returned in HTTP response as part of successful OTP verification/login ?
+### 6. What important headers get returned in HTTP response as part of successful OTP verification/login ?
 * VOTEISM_TOKEN - API ACCESS KEY (x-api-key) for the AWS API Gateway, which should be passed in as part of other REST requests.
 * VOTEISM_ACCESS_TOKEN - JWT token encapsulating the User phone number which gets as part of other REST requests to recognize the user sending the request.
 * VOTEISM_FIRESTORE_TOKEN - Firestore token used by the client application to access the firestore database.
 
-## 7. OTP status codes
+### 7. OTP status codes
 Once the user tries to register with the application, server sends a OTP to the client. Client needs to verify the OTP with the server. Different OTP status codes -
 
 * NOT_VERIFIED - If the OTP is not verified
@@ -49,10 +49,10 @@ Once the user tries to register with the application, server sends a OTP to the 
 * FAIL - If the OTP verification fails
 * EXPIRED - If the OTP expires
 
-## 8. Rate Throttling
+### 8. Rate Throttling
 User cannot vote more than 3 times per minute
 
-## 9. AWS Secrets Manager
+### 9. AWS Secrets Manager
 Voteism secrets are stored in the AWS Secrets Manager. Following secrets are stored -
 
 * TWILIO ACCOUNT ID
@@ -64,7 +64,7 @@ Voteism secrets are stored in the AWS Secrets Manager. Following secrets are sto
 * FIREBASE SECRET - Firebase account secret
 * VOTEISM PUBLIC KEY - Public key used to encrypt the user vote data
 
-## 10. REST API requests
+### 10. REST API requests
 #### 10.1 Register User
 #### REST API end point - /voteism/users/login
 #### Request Type - POST
